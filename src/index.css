@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-dark: #070709;
+    --bg-surface: #0e0d12;
+    --bg-card: #14131a;
+    --accent-red: #8B001D;
+    --accent-crimson: #B81434;
+    --accent-bright: #E52E4D;
+    --text-primary: #F4F4F5;
+    --text-secondary: #90909A;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-mono-tech {
+  font-family: 'Space Grotesk', monospace;
+}
+
+/* Custom aesthetic scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #08080a;
+}
+::-webkit-scrollbar-thumb {
+  background: #25242d;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8B001D;
+}
+
+/* Glassmorphism subtle overlay */
+.glass-panel {
+  background: rgba(18, 17, 24, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+  background: rgba(22, 19, 27, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(216, 26, 60, 0.3);
+  box-shadow: 0 0 35px -5px rgba(139, 0, 29, 0.35);
+}
+
+/* Reference jagged card top edge effect */
+.jagged-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Red volumetric glow under hero */
+.hero-crimson-glow {
+  background: radial-gradient(circle at 50% 45%, rgba(139, 0, 29, 0.42) 0%, rgba(184, 20, 52, 0.15) 45%, transparent 70%);
+}
