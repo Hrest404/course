@@ -7,11 +7,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "node --env-file=.env server/index.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
     "clsx": "^2.1.1",
+    "exceljs": "^4.4.0",
+    "mammoth": "^1.13.0",
     "motion": "^14.9.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

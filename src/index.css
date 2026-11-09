@@ -12,6 +12,11 @@
     --text-secondary: #90909A;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
   body {
     background-color: var(--bg-dark);
     color: var(--text-primary);

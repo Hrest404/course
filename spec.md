@@ -22,7 +22,7 @@ graph TD
     C --> E[Vector / Semantic & Keyword Matcher]
     D --> |PDF / MD / TXT files| E
     E --> F[Contextual Augmented Prompt]
-    F --> G[LLM Engine]
+    F --> G[Google Gemini API]
     G --> B
     H[Google Drive Connector - Phase 2] -.-> D
 ```

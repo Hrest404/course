@@ -36,7 +36,7 @@ export function HeroSection({ onExploreClick, onOpenAiTutor }: HeroSectionProps)
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="font-display font-black text-[18vw] md:text-[170px] lg:text-[230px] leading-none tracking-[-0.05em] text-white/90 uppercase inline-block scale-y-105"
+            className="font-display font-black text-[min(230px,18vw)] leading-none tracking-[-0.05em] text-white/90 uppercase inline-block scale-y-105"
           >
             EMBE
           </motion.h1>

@@ -72,14 +72,14 @@ export function Navbar({ onOpenAiTutor }: NavbarProps) {
           
           <button
             aria-label="Личный кабинет"
-            className="hidden sm:flex w-10 h-10 rounded-full bg-[#131218] border border-white/10 items-center justify-center text-zinc-300 hover:text-white hover:border-[#8B001D] transition-all"
+            className="hidden lg:flex w-10 h-10 rounded-full bg-[#131218] border border-white/10 items-center justify-center text-zinc-300 hover:text-white hover:border-[#8B001D] transition-all"
           >
             <User size={17} weight="bold" />
           </button>
 
           <a
             href="#courses"
-            className="hidden sm:flex items-center gap-2 pl-4 pr-1.5 py-1.5 rounded-full bg-white text-zinc-950 font-bold text-xs tracking-wider uppercase hover:bg-zinc-200 transition-all shadow-md group"
+            className="hidden lg:flex items-center gap-2 pl-4 pr-1.5 py-1.5 rounded-full bg-white text-zinc-950 font-bold text-xs tracking-wider uppercase hover:bg-zinc-200 transition-all shadow-md group"
           >
             <span>Начать</span>
             <div className="w-7 h-7 rounded-full bg-[#8B001D] flex items-center justify-center text-white group-hover:scale-105 transition-transform">
