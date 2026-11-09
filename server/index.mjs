@@ -23,7 +23,7 @@ const drive = new GoogleDriveConnector({
 const connectors = { [drive.id]: drive };
 const oauthStates = new Set(); // одноразовые state для защиты OAuth от подделки запроса
 const KEY = process.env.GEMINI_API_KEY;
-const MODEL = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
 
 let index = await buildIndex(RAG_DIR);
 let courses = await buildCourses(RAG_DIR);
@@ -54,11 +54,18 @@ async function askGemini(question, hits) {
     'Ты — AI-тьютор учебного центра. Отвечай по-русски, кратко и только на основе фрагментов ниже. ' +
     'Если в них нет ответа — так и скажи, ничего не выдумывай. Ссылайся на источники номерами [1], [2].\n\n' +
     `Фрагменты:\n${context}\n\nВопрос: ${question}`;
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': KEY },
-    body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }] }),
-  });
+  const call = () =>
+    fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': KEY },
+      body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }] }),
+    });
+  let res = await call();
+  // Перегрузка (503) обычно кратковременная — пробуем ещё раз.
+  if (res.status === 503) {
+    await new Promise((r) => setTimeout(r, 1500));
+    res = await call();
+  }
   if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).slice(0, 200)}`);
   const data = await res.json();
   return data.candidates?.[0]?.content?.parts?.map((p) => p.text).join('') ?? '';
