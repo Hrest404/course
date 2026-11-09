@@ -50,6 +50,7 @@ export function ManifestoSection({ courses, error }: ManifestoSectionProps) {
           <div className="flex flex-wrap items-center gap-2 mb-8 font-mono-tech text-sm">
             <span className="text-zinc-400">[About us]</span>
             <span className="px-3 py-1 rounded-full border border-white/10 text-zinc-300">Academy</span>
+            <span className="px-3 py-1 rounded-full bg-[#8B001D] text-white">Since 2020</span>
           </div>
 
           <motion.h2
@@ -70,7 +71,7 @@ export function ManifestoSection({ courses, error }: ManifestoSectionProps) {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between mb-10">
             <h3 className="font-display font-bold text-2xl md:text-4xl text-white">Направления</h3>
-            <span className="font-mono-tech text-sm text-zinc-400">{directions.length} направлений</span>
+            <span className="font-mono-tech text-sm text-zinc-500">{directions.length} направлений</span>
           </div>
 
           {courses === null ? (
@@ -105,7 +106,7 @@ export function ManifestoSection({ courses, error }: ManifestoSectionProps) {
                     )}
                   >
                     <div>
-                      <span className={clsx('font-mono-tech text-xs', isActive ? 'text-white/70' : 'text-zinc-600')}>
+                      <span className={clsx('font-mono-tech text-xs', isActive ? 'text-white/70' : 'text-zinc-500')}>
                         {String(i + 1).padStart(2, '0')} / {n} {plural(n)}
                       </span>
                       <h4 className="font-display font-bold text-2xl mt-3 leading-tight break-words">{d.title}</h4>

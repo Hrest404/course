@@ -38,7 +38,7 @@ export function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="flex-1 rounded-full bg-white/5 border border-white/10 px-5 py-3 text-sm text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#8B001D]"
+                  className="flex-1 rounded-full bg-white/5 border border-white/10 px-5 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#8B001D]"
                 />
                 <button type="submit" className="rounded-full bg-[#8B001D] hover:bg-[#A5102A] px-6 py-3 text-sm font-semibold text-white transition-colors">
                   Подписаться
@@ -58,7 +58,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 py-6 text-xs text-zinc-400">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 py-6 text-xs text-zinc-500">
           <span>© 2026 EMBE Academy. Все права защищены.</span>
           <span>Политика конфиденциальности · Публичная оферта</span>
         </div>

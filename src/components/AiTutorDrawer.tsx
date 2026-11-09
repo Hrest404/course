@@ -145,7 +145,7 @@ export function AiTutorDrawer({ open, onOpenChange }: AiTutorDrawerProps) {
           transition={{ type: 'spring', stiffness: 400, damping: 20 }}
           className="fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-[#8B001D] text-white flex items-center justify-center shadow-[0_0_30px_rgba(209,26,56,0.5)]"
         >
-          <span className="absolute inset-0 rounded-full bg-[#D11A38]/50 motion-safe:animate-ping" aria-hidden="true" />
+          <span className="absolute inset-0 rounded-full bg-[#D11A38]/50 animate-ping" aria-hidden="true" />
           <Sparkle size={24} weight="fill" className="relative" />
         </motion.button>
       )}
@@ -192,7 +192,7 @@ export function AiTutorDrawer({ open, onOpenChange }: AiTutorDrawerProps) {
                 <ConnectorsPanel />
               </div>
             ) : (
-            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4" aria-live="polite">
+            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
               {messages.length === 0 && (
                 <div className="pt-4">
                   <h3 className="font-display font-bold text-xl text-white">Привет! Чем помочь?</h3>
@@ -261,7 +261,7 @@ export function AiTutorDrawer({ open, onOpenChange }: AiTutorDrawerProps) {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Напишите вопрос…"
-                className="flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-zinc-400 focus:outline-none focus:border-[#8B001D]"
+                className="flex-1 rounded-full bg-white/5 border border-white/10 px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-[#8B001D]"
               />
               <button
                 type="submit"

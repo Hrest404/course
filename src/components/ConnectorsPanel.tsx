@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ArrowsClockwise, CheckCircle, Warning } from '@phosphor-icons/react';
 
 interface Connector {
@@ -22,23 +22,20 @@ export function ConnectorsPanel() {
     return result === 'connected' ? 'Google Drive подключён.' : 'Не удалось подключить Google Drive.';
   });
 
-  // Список перезагружается при монтировании и после каждой синхронизации (смена reloadKey).
-  const [reloadKey, setReloadKey] = useState(0);
+  const load = useCallback(async () => {
+    try {
+      const res = await fetch('/api/connectors');
+      if (!res.ok) throw new Error();
+      setList(await res.json());
+      setError('');
+    } catch {
+      setError('RAG-сервис недоступен. Запустите npm run server.');
+    }
+  }, []);
 
   useEffect(() => {
-    let alive = true;
-    fetch('/api/connectors')
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error())))
-      .then((data: Connector[]) => {
-        if (!alive) return;
-        setList(data);
-        setError('');
-      })
-      .catch(() => alive && setError('RAG-сервис недоступен. Запустите npm run server.'));
-    return () => {
-      alive = false;
-    };
-  }, [reloadKey]);
+    void load();
+  }, [load]);
 
   const sync = async () => {
     setBusy(true);
@@ -48,7 +45,7 @@ export function ConnectorsPanel() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setMessage(`Синхронизировано файлов: ${data.files}, удалено: ${data.removed}. Фрагментов в базе: ${data.fragments}.`);
-      setReloadKey((k) => k + 1);
+      await load();
     } catch (e) {
       setMessage(e instanceof Error && e.message ? e.message : 'Ошибка синхронизации');
     } finally {
