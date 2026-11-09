@@ -53,7 +53,7 @@ export function HeroSection({ onExploreClick, onOpenAiTutor }: HeroSectionProps)
             {/* Direct frameless cutout with neural alpha matting, solid hair, zero borders */}
             <div className="relative flex items-center justify-center">
               <img
-                src="/assets/hero_scholar_cutout.png?v=2"
+                src="/assets/hero_scholar_cutout.webp"
                 alt="Академический наставник в очках с книгой"
                 className="w-[380px] sm:w-[500px] md:w-[600px] lg:w-[670px] h-auto object-contain select-none drop-shadow-[0_20px_50px_rgba(139,0,29,0.35)]"
               />

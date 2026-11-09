@@ -17,7 +17,7 @@ export function MentorsSection() {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-10">
           <h3 className="font-display font-bold text-2xl md:text-4xl text-white">Менторы</h3>
-          <span className="font-mono-tech text-sm text-zinc-500">практики индустрии</span>
+          <span className="font-mono-tech text-sm text-zinc-400">практики индустрии</span>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">

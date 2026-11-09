@@ -21,42 +21,42 @@ export function Navbar({ onOpenAiTutor }: NavbarProps) {
               <span className="font-display font-extrabold tracking-wider text-white text-base leading-none">
                 EMBE<span className="text-[#D11A38]">.</span>
               </span>
-              <span className="text-[10px] uppercase font-mono-tech tracking-widest text-zinc-500">ACADEMY</span>
+              <span className="text-[10px] uppercase font-mono-tech tracking-widest text-zinc-400">ACADEMY</span>
             </div>
           </a>
         </div>
 
         {/* Center: Desktop Navigation links in pill container */}
-        <nav className="hidden md:flex items-center gap-1 bg-[#121117]/90 border border-white/10 rounded-full px-5 py-1.5 shadow-inner">
+        <nav className="hidden lg:flex items-center gap-1 bg-[#121117]/90 border border-white/10 rounded-full px-5 py-1.5 shadow-inner">
           <a
             href="#hero"
-            className="px-4 py-1.5 text-xs font-semibold tracking-wider text-white hover:text-[#E52E4D] transition-colors uppercase"
+            className="px-4 py-1.5 text-xs font-semibold whitespace-nowrap tracking-wider text-white hover:text-[#E52E4D] transition-colors uppercase"
           >
             Главная
           </a>
           <a
             href="#manifesto"
-            className="px-4 py-1.5 text-xs font-semibold tracking-wider text-zinc-400 hover:text-white transition-colors uppercase"
+            className="px-4 py-1.5 text-xs font-semibold whitespace-nowrap tracking-wider text-zinc-400 hover:text-white transition-colors uppercase"
           >
             О нас
           </a>
           <a
             href="#directions"
-            className="px-4 py-1.5 text-xs font-semibold tracking-wider text-zinc-400 hover:text-white transition-colors uppercase"
+            className="px-4 py-1.5 text-xs font-semibold whitespace-nowrap tracking-wider text-zinc-400 hover:text-white transition-colors uppercase"
           >
             Направления
           </a>
           <a
             href="#courses"
-            className="px-4 py-1.5 text-xs font-semibold tracking-wider text-zinc-400 hover:text-white transition-colors uppercase"
+            className="px-4 py-1.5 text-xs font-semibold whitespace-nowrap tracking-wider text-zinc-400 hover:text-white transition-colors uppercase"
           >
             Курсы
           </a>
           <button
             onClick={onOpenAiTutor}
-            className="flex items-center gap-1.5 px-3 py-1 text-xs font-bold tracking-wider text-[#FF4D6D] bg-[#8B001D]/20 border border-[#8B001D]/40 rounded-full hover:bg-[#8B001D]/40 transition-colors uppercase cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1 text-xs font-bold whitespace-nowrap tracking-wider text-[#FF4D6D] bg-[#8B001D]/20 border border-[#8B001D]/40 rounded-full hover:bg-[#8B001D]/40 transition-colors uppercase cursor-pointer"
           >
-            <Sparkle size={13} weight="fill" className="text-[#FF4D6D] animate-pulse" />
+            <Sparkle size={13} weight="fill" className="text-[#FF4D6D] motion-safe:animate-pulse" />
             AI Тьютор (RAG)
           </button>
         </nav>
@@ -90,7 +90,7 @@ export function Navbar({ onOpenAiTutor }: NavbarProps) {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-10 h-10 rounded-full bg-[#131218] border border-white/10 flex items-center justify-center text-zinc-200"
+            className="lg:hidden w-10 h-10 rounded-full bg-[#131218] border border-white/10 flex items-center justify-center text-zinc-200"
             aria-label="Меню"
           >
             {mobileMenuOpen ? <X size={20} /> : <List size={20} />}
@@ -100,7 +100,7 @@ export function Navbar({ onOpenAiTutor }: NavbarProps) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/10 bg-[#0d0d12] px-6 py-5 flex flex-col gap-4">
+        <div className="lg:hidden border-b border-white/10 bg-[#0d0d12] px-6 py-5 flex flex-col gap-4">
           <a
             href="#hero"
             onClick={() => setMobileMenuOpen(false)}

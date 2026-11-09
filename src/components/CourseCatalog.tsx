@@ -18,7 +18,7 @@ interface FilterRowProps {
 function FilterRow({ label, options, value, onChange }: FilterRowProps) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="font-mono-tech text-xs text-zinc-500 w-24 shrink-0">{label}</span>
+      <span className="font-mono-tech text-xs text-zinc-400 w-24 shrink-0">{label}</span>
       {[ALL, ...options].map((o) => (
         <button
           key={o}
@@ -99,7 +99,7 @@ function SyllabusModal({ course, onClose }: { course: Course; onClose: () => voi
 
         {course.teachers.length > 0 && (
           <p className="mt-6 text-sm text-zinc-300">
-            <span className="font-mono-tech text-xs text-zinc-500">Преподаватели: </span>
+            <span className="font-mono-tech text-xs text-zinc-400">Преподаватели: </span>
             {course.teachers.join(', ')}
           </p>
         )}
@@ -149,7 +149,7 @@ export function CourseCatalog({ courses, error }: CourseCatalogProps) {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-8">
           <h3 className="font-display font-bold text-2xl md:text-4xl text-white">Каталог курсов</h3>
-          <span className="font-mono-tech text-sm text-zinc-500">{visible.length} из {all.length}</span>
+          <span className="font-mono-tech text-sm text-zinc-400">{visible.length} из {all.length}</span>
         </div>
 
         {courses === null ? (
@@ -192,7 +192,7 @@ export function CourseCatalog({ courses, error }: CourseCatalogProps) {
                         <span>{c.format}</span>
                       </div>
                       {c.teachers.length > 0 && (
-                        <p className="text-xs text-zinc-500">{c.teachers.slice(0, 2).join(', ')}{c.teachers.length > 2 && ` +${c.teachers.length - 2}`}</p>
+                        <p className="text-xs text-zinc-400">{c.teachers.slice(0, 2).join(', ')}{c.teachers.length > 2 && ` +${c.teachers.length - 2}`}</p>
                       )}
                       <div className="mt-auto flex items-center justify-between pt-2">
                         <span className="font-display font-bold text-lg text-white">{c.price != null ? `${c.price.toLocaleString('ru-RU')} сум` : '—'}</span>
