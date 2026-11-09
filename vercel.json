@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/*.mjs": {
+      "includeFiles": "rag/**",
+      "maxDuration": 30
+    }
+  }
+}

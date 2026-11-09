@@ -3,7 +3,8 @@
 import http from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { watch } from 'node:fs';
-import { buildIndex, search } from './rag.mjs';
+import { buildIndex } from './rag.mjs';
+import { answerQuestion } from './chat.mjs';
 import { buildCourses } from './courses.mjs';
 import { GoogleDriveConnector } from './connectors/google-drive.mjs';
 
@@ -22,8 +23,6 @@ const drive = new GoogleDriveConnector({
 });
 const connectors = { [drive.id]: drive };
 const oauthStates = new Set(); // одноразовые state для защиты OAuth от подделки запроса
-const KEY = process.env.GEMINI_API_KEY;
-const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
 
 let index = await buildIndex(RAG_DIR);
 let courses = await buildCourses(RAG_DIR);
@@ -47,29 +46,6 @@ watch(RAG_DIR, () => {
     }
   }, 600); // ждём, пока файл допишется
 });
-
-async function askGemini(question, hits) {
-  const context = hits.map((h, i) => `[${i + 1}] (${h.source} — ${h.section})\n${h.text}`).join('\n\n');
-  const prompt =
-    'Ты — AI-тьютор учебного центра. Отвечай по-русски, кратко и только на основе фрагментов ниже. ' +
-    'Если в них нет ответа — так и скажи, ничего не выдумывай. Ссылайся на источники номерами [1], [2].\n\n' +
-    `Фрагменты:\n${context}\n\nВопрос: ${question}`;
-  const call = () =>
-    fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': KEY },
-      body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }] }] }),
-    });
-  let res = await call();
-  // Перегрузка (503) обычно кратковременная — пробуем ещё раз.
-  if (res.status === 503) {
-    await new Promise((r) => setTimeout(r, 1500));
-    res = await call();
-  }
-  if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const data = await res.json();
-  return data.candidates?.[0]?.content?.parts?.map((p) => p.text).join('') ?? '';
-}
 
 function readBody(req) {
   return new Promise((resolve, reject) => {
@@ -132,18 +108,7 @@ http
       const { question } = JSON.parse((await readBody(req)) || '{}');
       if (!question || typeof question !== 'string') return send(res, 400, { error: 'question required' });
 
-      const hits = search(index, question, 5);
-      const sources = hits.map((h) => ({ source: h.source, section: h.section, snippet: h.text.slice(0, 300) }));
-      if (!hits.length) return send(res, 200, { answer: 'В базе знаний нет информации по этому вопросу.', sources: [], mode: 'none' });
-      if (!KEY) {
-        return send(res, 200, { answer: 'Ключ GEMINI_API_KEY не задан — показаны найденные фрагменты базы знаний.', sources, mode: 'search-only' });
-      }
-      try {
-        return send(res, 200, { answer: await askGemini(question, hits), sources, mode: 'gemini' });
-      } catch (e) {
-        console.error(e);
-        return send(res, 200, { answer: 'Gemini сейчас недоступен — показаны найденные фрагменты базы знаний.', sources, mode: 'search-only' });
-      }
+      return send(res, 200, await answerQuestion(index, question));
     } catch (e) {
       console.error(e);
       send(res, 500, { error: String(e.message ?? e) });
